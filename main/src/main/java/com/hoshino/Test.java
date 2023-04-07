@@ -7,7 +7,7 @@ import com.formdev.flatlaf.FlatLightLaf;
 import javax.swing.*;
 import java.awt.*;
 
-public class MainForm {
+public class Test {
     private static void createAndShowGUI() {
         //创建及设置窗口
         JFrame frame = new JFrame("BADASS バイダス");
@@ -54,6 +54,7 @@ public class MainForm {
         JMenuItem save = new JMenuItem("保存");//保存
         save.addActionListener(e->{
             // 打开... 菜单项的事件监听
+            // 小彩蛋（
             System.err.println("文件保存失败");
             System.err.println("正在尝试退出...");
             try {
@@ -89,6 +90,6 @@ public class MainForm {
 
     public static void main(String[] args) {
         // 显示应用 GUI
-        javax.swing.SwingUtilities.invokeLater(MainForm::createAndShowGUI);
+        javax.swing.SwingUtilities.invokeLater(Test::createAndShowGUI);
     }
 }
