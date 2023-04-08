@@ -2,7 +2,7 @@ package com.hoshino.frames;
 
 public class TestFrame extends HBasicFrame{
     public TestFrame() {
-        super();
+        super("test");
         //设置大小
         setSize(800, 600);
         //设置可见

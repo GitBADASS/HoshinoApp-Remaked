@@ -12,7 +12,7 @@ public class Test {
         //创建及设置窗口
         JFrame frame = new JFrame("BADASS バイダス");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setIconImage(new ImageIcon("main/src/main/resources/icon.png").getImage());
+        frame.setIconImage(new ImageIcon("main/src/main/resources/img/icon.png").getImage());
 
         //添加切换主题的按钮
         JButton blackTheme = new JButton("black");//暗色

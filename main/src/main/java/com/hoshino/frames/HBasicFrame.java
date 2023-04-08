@@ -1,20 +1,26 @@
 package com.hoshino.frames;
 
-import com.formdev.flatlaf.FlatLightLaf;
+import com.formdev.flatlaf.intellijthemes.FlatLightFlatIJTheme;
+import com.hoshino.custom.img.HImageCompress;
 
 import javax.swing.*;
 
 public class HBasicFrame extends JFrame {
+    private ImageIcon icon;
+
     public HBasicFrame() {
         //默认主题：flat 亮色
-        FlatLightLaf.setup();
+        //FlatDarkFlatIJTheme.setup();
+        FlatLightFlatIJTheme.setup();
         SwingUtilities.updateComponentTreeUI(this);
-
-        //添加标题栏菜单
+        icon = new ImageIcon("main/src/main/resources/img/icon.png");
+        setIconImage(HImageCompress.compressedImage(icon));
+        /*//添加标题栏菜单
         JMenuBar titleMenuBar = new JMenuBar();
         JMenu testM1 = new JMenu("测试1");
         JMenu testM2 = new JMenu("测试2");
         JMenuItem item1 = new JMenuItem("测试1-1");
+        item1.setIcon(HImageCompress.compressedImageIcon(new ImageIcon("main/src/main/resources/img/quit.png")));
         JMenuItem item2 = new JMenuItem("测试1-2");
         JMenuItem item3 = new JMenuItem("测试1-3");
         JMenuItem item21 = new JMenuItem("测试2-1");
@@ -28,6 +34,23 @@ public class HBasicFrame extends JFrame {
         testM2.add(item23);
         titleMenuBar.add(testM1);
         titleMenuBar.add(testM2);
-        setJMenuBar(titleMenuBar);
+        titleMenuBar.add(new JToggleButton("test"));
+        setJMenuBar(titleMenuBar);*/
+    }
+
+    public HBasicFrame(String titleText) {
+        this();
+        this.setTitle(titleText);
+    }
+
+    public HBasicFrame(String titleText, ImageIcon icon) {
+        this();
+        this.setTitle(titleText);
+        this.icon = icon;
+        this.setIconImage(icon.getImage());
+    }
+
+    public ImageIcon getIcon() {
+        return icon;
     }
 }
