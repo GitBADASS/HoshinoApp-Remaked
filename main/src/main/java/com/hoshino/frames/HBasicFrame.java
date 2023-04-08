@@ -1,5 +1,7 @@
 package com.hoshino.frames;
 
+import com.formdev.flatlaf.FlatDarkLaf;
+import com.formdev.flatlaf.intellijthemes.FlatDarkFlatIJTheme;
 import com.formdev.flatlaf.intellijthemes.FlatLightFlatIJTheme;
 import com.hoshino.custom.img.HImageCompress;
 
@@ -7,6 +9,7 @@ import javax.swing.*;
 
 public class HBasicFrame extends JFrame {
     private ImageIcon icon;
+    private String themeStyle;
 
     public HBasicFrame() {
         //默认主题：flat 亮色
@@ -48,6 +51,25 @@ public class HBasicFrame extends JFrame {
         this.setTitle(titleText);
         this.icon = icon;
         this.setIconImage(icon.getImage());
+    }
+
+    //设置主题
+    public void setThemeStyle(String themeStyle) {
+        switch (themeStyle) {
+            case "LIGHT":
+                FlatLightFlatIJTheme.setup();
+                break;
+            case "DARK":
+                FlatDarkFlatIJTheme.setup();
+                break;
+        }
+        SwingUtilities.updateComponentTreeUI(this);
+        this.themeStyle = themeStyle;
+    }
+
+    //获取当前主题
+    public String getThemeStyle() {
+        return themeStyle == null ? "LIGHT" : themeStyle;
     }
 
     public ImageIcon getIcon() {

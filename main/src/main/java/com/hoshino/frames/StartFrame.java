@@ -1,12 +1,8 @@
 package com.hoshino.frames;
 
-import com.formdev.flatlaf.intellijthemes.FlatDarkFlatIJTheme;
-import com.formdev.flatlaf.intellijthemes.FlatLightFlatIJTheme;
-import com.hoshino.custom.components.HToggleButton;
-import com.hoshino.custom.img.HImageCompress;
+import com.hoshino.custom.themes.HThemeType;
 
 import javax.swing.*;
-import java.awt.*;
 
 public class StartFrame extends HBasicFrame{
     int themeState;
@@ -16,24 +12,26 @@ public class StartFrame extends HBasicFrame{
 
         //添加标题栏组件栏
         JMenuBar titleBar = new JMenuBar();
-        //日夜间切换按钮
-        HToggleButton dayOrNight = new HToggleButton("day", HImageCompress.compressedImageIcon(new ImageIcon("main/src/main/resources/img/icon.png")));
-        themeState = 1;
-        dayOrNight.addChangeListener(e->{
-            if(themeState == 1){
-                dayOrNight.setText("night");
-                FlatDarkFlatIJTheme.setup();
-                SwingUtilities.updateComponentTreeUI(this);
-                this.setIconImage(HImageCompress.compressedImage(new ImageIcon("main/src/main/resources/img/icon-night.png")));
-            } else if(themeState == 2) {
-                themeState = 1;
-                dayOrNight.setText("day");
-                FlatLightFlatIJTheme.setup();
-                SwingUtilities.updateComponentTreeUI(this);
-                this.setIconImage(HImageCompress.compressedImage(new ImageIcon("main/src/main/resources/img/icon.png")));
-            }
+
+        //主题切换按钮 TODO:切换为深色主题之后无法再切换回来！
+        JMenu themeMenu = new JMenu("主题");
+        //浅色主题
+        JMenuItem light = new JMenuItem("浅色");
+        light.addActionListener(e->{
+            //设置为浅色主题
+            super.setThemeStyle(HThemeType.LIGHT_THEME);
         });
-        titleBar.add(dayOrNight);
+        //深色主题
+        JMenuItem dark = new JMenuItem("深色");
+        dark.addActionListener(e->{
+            //设置为深色主题
+            super.setThemeStyle(HThemeType.DARK_THEME);
+        });
+        //添加到menu
+        themeMenu.add(light);
+        themeMenu.add(dark);
+        //将menu添加到menubar
+        titleBar.add(themeMenu);
 
         //添加内容到
         setJMenuBar(titleBar);
