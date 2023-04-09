@@ -1,7 +1,7 @@
 # HoshinoApp-Remaked
 **Thanks and goodbye, JavaFX!**
 
-Remake the HoshinoApp, we choose swing instead of javafx. We've drawn some lessons from the previous one, and we will correct mistakes.**Every thing that kills me make me fee alive.**
+Remake the HoshinoApp, we choose swing instead of javafx. We've drawn some lessons from the previous one, and we will correct mistakes. **Every thing that kills me make me fee alive.**
 
 # 📕<font color="#4600C7">Hoshino</font> App
 
@@ -35,7 +35,8 @@ Only a private group. We some students set up it to post some interesting things
 
 
 # 🍜<span id="chinese">中文介绍-<font color="#4600C7">星夜</font>应用程序</span>
-**バイバイ&感谢，javafx**
+**バイバイ & 感谢，javafx!**
+
 我们使用 swing 重置了 HoshinoApp，改正fx版出现的问题、吸取fx版带给我们的教训。**沉舟侧畔千帆过，病树前头万木春。**
 
 **🥀如果我们始终缺少开发人员或者始终忙于在校的学习，这个项目或将会进展缓慢🏜。**
