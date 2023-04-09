@@ -3,6 +3,8 @@ package com.hoshino.frames;
 import com.formdev.flatlaf.intellijthemes.FlatDarkFlatIJTheme;
 import com.hoshino.custom.img.HImageCompress;
 import com.hoshino.custom.themes.HCyan;
+import com.hoshino.custom.themes.HDarkCustom;
+import com.hoshino.custom.themes.HLightCustom;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -47,10 +49,10 @@ public class HBasicFrame extends JFrame {
     public void setThemeStyle(String themeStyle) {
         switch (themeStyle) {
             case "LIGHT":
-                HCyan.setup();
+                HLightCustom.setup();
                 break;
             case "DARK":
-                FlatDarkFlatIJTheme.setup();
+                HDarkCustom.setup();
                 break;
         }
         SwingUtilities.updateComponentTreeUI(this);
