@@ -46,3 +46,5 @@ Only a private group. We some students set up it to post some interesting things
 星夜社是一个由中学生建立的、主业为发布学校趣闻（~~或发一些牢骚~~）的团体。
 
 如果可能的话，我们会继续推出网站和移动程序。
+
+**额外的说明：**中文介绍内容相较于英文没有任何关键性的缺少，它是英文内容的精简提炼（直白的：英语蹩脚絮絮叨叨）
