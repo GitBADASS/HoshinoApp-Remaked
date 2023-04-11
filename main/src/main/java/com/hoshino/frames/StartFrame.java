@@ -30,9 +30,11 @@ public class StartFrame extends HBasicFrame{
         JPanel left = new JPanel();
         left.setPreferredSize(new Dimension(150, 0));
         left.setLayout(new FlowLayout());
-        JLabel bottom = new JLabel("bottom label");
+        JPanel bottom = new JPanel();
+        bottom.setPreferredSize(new Dimension(0, 20));
+        bottom.add(new JLabel("hoshino 测试的测试的"));
         JMenuBar secBar = new JMenuBar();
-        JMenu tm1 = new JMenu("test");
+        JMenu tm1 = new JMenu("设置[装的]");
         JMenuItem t1Item1 = new JMenuItem("t-item1");
         JMenuItem t1Item2 = new JMenuItem("t-item2");
         JMenuItem t1Item3 = new JMenuItem("t-item3");
@@ -45,7 +47,7 @@ public class StartFrame extends HBasicFrame{
         tm1.add(t1Item4);
         tm1.add(t1Item5);
         tm1.add(t1Item6);
-        JMenu tm2 = new JMenu("nice");
+        JMenu tm2 = new JMenu("文件");
         JMenuItem n1Item1 = new JMenuItem("n-item1");
         JMenuItem n1Item2 = new JMenuItem("n-item2");
         JMenuItem n1Item3 = new JMenuItem("n-item3");
@@ -58,7 +60,7 @@ public class StartFrame extends HBasicFrame{
         tm2.add(n1Item4);
         tm2.add(n1Item5);
         tm2.add(n1Item6);
-        JMenu tm3 = new JMenu("bad");
+        JMenu tm3 = new JMenu("欸你看我在右边");
         JMenuItem b1Item1 = new JMenuItem("n-item1");
         JMenuItem b1Item2 = new JMenuItem("n-item2");
         JMenuItem b1Item3 = new JMenuItem("n-item3");
@@ -73,6 +75,7 @@ public class StartFrame extends HBasicFrame{
         tm2.add(b1Item6);
         secBar.add(tm1);
         secBar.add(tm2);
+        secBar.add(Box.createHorizontalGlue());//此句之后加入的 menu 全部靠右
         secBar.add(tm3);
         JButton test = new JButton("TEST");
         JButton test2 = new JButton("TEST2");
@@ -113,6 +116,10 @@ public class StartFrame extends HBasicFrame{
         m2.add(mi_2);
         m2.add(mi_3);
         titleBar.add(m1);
+        titleBar.add(new JMenu("Test"));
+        titleBar.add(new JMenu("Test"));
+        titleBar.add(Box.createHorizontalGlue());//此句之后加入的 menu 全部靠右
+        titleBar.add(new JMenu("Test"));
         titleBar.add(m2);
         add(secBar, BorderLayout.NORTH);
         add(mainS, BorderLayout.CENTER);
