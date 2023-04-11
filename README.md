@@ -1,7 +1,7 @@
 # HoshinoApp-Remaked
 **Thanks and goodbye, JavaFX!**
 
-Remake the HoshinoApp, this time it's based on Swing instead of JavaFX.
+Remake the HoshinoApp, we choose swing instead of javafx. We've drawn some lessons from the previous one, and we will correct mistakes. **Every thing that kills me make me fee alive.**
 
 # 📕<font color="#4600C7">Hoshino</font> App
 
@@ -35,11 +35,16 @@ Only a private group. We some students set up it to post some interesting things
 
 
 # 🍜<span id="chinese">中文介绍-<font color="#4600C7">星夜</font>应用程序</span>
+**バイバイ & 感谢，javafx!**
+
+我们使用 swing 重置了 HoshinoApp，改正fx版出现的问题、吸取fx版带给我们的教训。**沉舟侧畔千帆过，病树前头万木春。**
 
 **🥀如果我们始终缺少开发人员或者始终忙于在校的学习，这个项目或将会进展缓慢🏜。**
 
-本项目将会被开发去辅助用户的英语学习（有单词学习库等功能，或许作为的中学生我们真的需要它）
+本项目将会被开发去辅助用户的英语学习（有单词学习库等功能，或许作为的中学生我们真的需要它）。将来它的职能可能会发生变化。
 
 星夜社是一个由中学生建立的、主业为发布学校趣闻（~~或发一些牢骚~~）的团体。
 
 如果可能的话，我们会继续推出网站和移动程序。
+
+**额外的说明：** 中文的介绍内容相较于英文没有任何关键性的缺少，它是英文内容的精简提炼（直白的：英语蹩脚絮絮叨叨）
