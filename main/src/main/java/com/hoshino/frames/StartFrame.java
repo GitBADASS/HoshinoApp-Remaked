@@ -5,8 +5,25 @@ import java.awt.*;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 
+/**
+ * <h1>启动窗口</h1>
+ * <b>简短介绍</b><br>
+ * 这是继承自
+ * {@link HBasicFrame}
+ * 的一个 {@link JFrame} 子类。它是程序的启动入口，打开程序最先显示的窗口。这个窗口需要完成许多任务，它是程序的一个门面。许多功能需要体现在这个窗口之中，可以说其它窗口只是这个窗口的附属。
+ * <b>详细介绍</b><br>
+ * 该类继承自
+ * {@link HBasicFrame}
+ * 类，同时也是 {@link JFrame} 的子类。它没有重写父类方法。它在该类的构造方法中引用了HBasicFrame父类的构造方法。
+ */
 public class StartFrame extends HBasicFrame{
-
+    /**
+     * <b>构造方法</b>
+     * <br>
+     * 引入父类
+     * {@link HBasicFrame}
+     * 构造方法
+     */
     public StartFrame() {
         super("test"); //引入父类内容
         //设置窗口
@@ -19,8 +36,9 @@ public class StartFrame extends HBasicFrame{
         //TODO:==========以下内容仅为测试，待删去==========
         //重复内容使用while
         JPanel main = new JPanel();
-        main.setLayout(new FlowLayout());
-        main.setPreferredSize(new Dimension(300, 200));
+        BoxLayout mainLayout = new BoxLayout(main, BoxLayout.PAGE_AXIS);
+
+        main.setLayout(mainLayout);
         /*addComponentListener(new ComponentAdapter() {
             @Override
             public void componentResized(ComponentEvent e) {
@@ -29,10 +47,12 @@ public class StartFrame extends HBasicFrame{
         });*/
         JPanel left = new JPanel();
         left.setPreferredSize(new Dimension(150, 0));
-        left.setLayout(new FlowLayout());
-        JPanel bottom = new JPanel();
+        left.setLayout(new BoxLayout(left, BoxLayout.Y_AXIS));
+        JToolBar bottom = new JToolBar();
         bottom.setPreferredSize(new Dimension(0, 20));
         bottom.add(new JLabel("hoshino 测试的测试的"));
+        bottom.add(Box.createHorizontalGlue());
+        bottom.add(new JLabel("0.0.1 测试版本"));
         JMenuBar secBar = new JMenuBar();
         JMenu tm1 = new JMenu("设置[装的]");
         JMenuItem t1Item1 = new JMenuItem("t-item1");
@@ -61,6 +81,13 @@ public class StartFrame extends HBasicFrame{
         tm2.add(n1Item5);
         tm2.add(n1Item6);
         JMenu tm3 = new JMenu("欸你看我在右边");
+        JMenuItem rightItem = null;
+        rightItem = new JMenuItem("滥竽充数1");
+        tm3.add(rightItem);
+        rightItem = new JMenuItem("滥竽充数2");
+        tm3.add(rightItem);
+        rightItem = new JMenuItem("滥竽充数3");
+        tm3.add(rightItem);
         JMenuItem b1Item1 = new JMenuItem("n-item1");
         JMenuItem b1Item2 = new JMenuItem("n-item2");
         JMenuItem b1Item3 = new JMenuItem("n-item3");
@@ -79,7 +106,7 @@ public class StartFrame extends HBasicFrame{
         secBar.add(tm3);
         JButton test = new JButton("TEST");
         JButton test2 = new JButton("TEST2");
-        JButton test3 = new JButton("TEST3");
+        JLabel test3 = new JLabel("TEST3");
         JButton test4 = new JButton("TEST4");
         JButton test5 = new JButton("TEST5");
         JButton test6 = new JButton("TEST6");
@@ -87,6 +114,16 @@ public class StartFrame extends HBasicFrame{
         JButton test8 = new JButton("TEST8");
         JButton test9 = new JButton("TEST9");
         JButton test0 = new JButton("TEST0[TESTING_THE_LONG_BUTTON]");
+        JButton testN = new JButton("testX");
+        main.add(testN);
+        testN = new JButton("testX");
+        main.add(testN);
+        testN = new JButton("testX");
+        main.add(testN);
+        testN = new JButton("testX");
+        main.add(testN);
+        testN = new JButton("testX");
+        main.add(testN);
         main.add(test);
         main.add(test2);
         main.add(test3);
@@ -100,6 +137,7 @@ public class StartFrame extends HBasicFrame{
         JScrollPane mainS = new JScrollPane(main);
         left.add(test);
         left.add(test2);
+        left.add(Box.createHorizontalGlue());
         JScrollPane leftS = new JScrollPane(left);
         JMenu m1 = new JMenu("wow1");
         JMenuItem mi1 = new JMenuItem("w1");
