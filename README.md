@@ -4,7 +4,7 @@ Remake the HoshinoApp, we choose swing instead of javafx. We've drawn some lesso
 
 # 📕<font color="#4600C7">Hoshino</font> App
 
-> 中文版本在 [这里](#chinese) to jump to Chinese description.
+> 跳转中文介绍请点击[这里](#chinese)。
 
 **🥀If we are always busy in school studying or always short of developer, this project would progress slowly🏜.**
 
