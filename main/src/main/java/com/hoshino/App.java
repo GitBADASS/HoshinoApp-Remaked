@@ -1,7 +1,9 @@
 package com.hoshino;
 
 import com.formdev.flatlaf.FlatLaf;
-import com.hoshino.frames.StartFrame;
+import com.hoshino.custom.frames.StartFrame;
+
+import javax.swing.*;
 
 /**
  * HoshinoApp 程序启动启动类
@@ -12,6 +14,7 @@ public class App
     public static void main( String[] args ) {
         //注册主题文件夹
         FlatLaf.registerCustomDefaultsSource( "main/src/main/resources/themes" );
-        new StartFrame();
+        //创建开始界面
+        SwingUtilities.invokeLater(StartFrame::new);
     }
 }

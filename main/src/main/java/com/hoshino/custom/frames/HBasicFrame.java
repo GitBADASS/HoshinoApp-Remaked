@@ -1,20 +1,13 @@
-package com.hoshino.frames;
+package com.hoshino.custom.frames;
 
-import com.hoshino.custom.img.HImageCompress;
+import com.hoshino.custom.themes.HCyan;
 import com.hoshino.custom.themes.HDarkCustom;
 import com.hoshino.custom.themes.HLightCustom;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-import org.xml.sax.SAXException;
+import com.hoshino.userSettings.HXMLLoader;
+import com.hoshino.userSettings.UserSettings;
 
 import javax.swing.*;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-import java.io.File;
-import java.io.IOException;
+import java.awt.*;
 
 /**
  * <h1>千夜基本窗口</h1>
@@ -29,11 +22,12 @@ import java.io.IOException;
  */
 public class HBasicFrame extends JFrame {
     private ImageIcon icon;
-    private String themeStyle;
+    private String currentTheme;
+    private UserSettings settings;
 
     public HBasicFrame() {
         //加载用户设置
-        updateSettings();
+        updateAll();
         //UIManager.put("accentFocusColor", Color.decode("#4600C7"));
 
         //窗口居中出现
@@ -55,26 +49,41 @@ public class HBasicFrame extends JFrame {
     }
 
     //设置主题
-    public void setThemeStyle(String themeStyle) {
-        switch (themeStyle) {
-            case "LIGHT":
-                HLightCustom.setup();
-                break;
+    public void setCurrentTheme(String currentTheme) {
+        switch (currentTheme) {
             case "DARK":
                 HDarkCustom.setup();
                 break;
+            case "CYAN":
+                HCyan.setup();
+                break;
+            default:
+                HLightCustom.setup();
+                break;
         }
+        //TODO:主题更换牵扯到配置文件
         SwingUtilities.updateComponentTreeUI(this);
-        this.themeStyle = themeStyle;
+        this.currentTheme = currentTheme;
     }
 
     //获取当前主题
-    public String getThemeStyle() {
-        return themeStyle == null ? "LIGHT" : themeStyle;
+    public String getCurrentTheme() {
+        return currentTheme == null ? "LIGHT" : currentTheme;
     }
 
     public ImageIcon getIcon() {
         return icon;
+    }
+
+    public UserSettings getSettings() {
+        return settings;
+    }
+
+    //添加多个组件操作
+    public void addAll(Component... components) {
+        for (Component component : components) {
+            add(component);
+        }
     }
 
     /**
@@ -85,8 +94,8 @@ public class HBasicFrame extends JFrame {
      * 它也应该分得更细一点，将主题、其他一些配置的加载分开来<br>
      * 多线程
      */
-    public void updateSettings() {
-        //读取xml文件并加载
+    public void updateAll() {
+        /*//读取xml文件并加载
         File userSettings = new File("main/src/main/resources/user/settings.xml");
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder;
@@ -114,9 +123,8 @@ public class HBasicFrame extends JFrame {
 
                 //主题方面的自定义  TODO:主题的话，读取官方给定的properties文件！！！
                 Node themeNode = element.getElementsByTagName("theme").item(0); //获取标签
-                String themeContent = themeNode.getTextContent(); //获取内容
-                themeStyle = themeContent; //更新当前主题
-                setThemeStyle(themeContent); //设置主题
+                currentTheme = themeNode.getTextContent(); //获取内容
+                setCurrentTheme(currentTheme); //设置主题
 
                 //图标自定义
                 Node iconNode = element.getElementsByTagName("icon").item(0); //获取标签
@@ -124,6 +132,9 @@ public class HBasicFrame extends JFrame {
                 icon = new ImageIcon(iconPath); //更新当前图标
                 setIconImage(HImageCompress.compressedImage(icon)); //设置图标到标题栏
             }
-        }
+        }*/
+        HXMLLoader loader = new HXMLLoader("main/src/main/resources/user/settings.xml");
+        this.settings = loader.load();
+        setCurrentTheme(settings.getTheme());
     }
 }

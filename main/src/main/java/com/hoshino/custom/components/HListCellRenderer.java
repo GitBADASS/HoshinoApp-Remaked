@@ -2,9 +2,8 @@ package com.hoshino.custom.components;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.Objects;
 
 /**
  * <h1>
@@ -20,20 +19,12 @@ import java.util.ArrayList;
  */
 public class HListCellRenderer extends JPanel implements ListCellRenderer<Object> {
     private final JLabel textLabel = new JLabel();
-    private final ArrayList<String> contentText = new ArrayList<>();
+    private final ArrayList<String> contentTexts = new ArrayList<>();
 
     public HListCellRenderer(DefaultListModel<String> model) {
         //容器有关设置
         setLayout(new GridLayout()); //布局：网格布局；目的：使内部组件填充
         setPreferredSize(new Dimension(0, 80)); //尺寸：80px
-        //TODO: 移动监听
-        textLabel.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseEntered(MouseEvent e) {
-                System.out.println("111强强强沃趣沃趣沃趣");
-                super.mouseEntered(e);
-            }
-        });
 
         //内部组件加载
         setUpContents(model);
@@ -59,19 +50,17 @@ public class HListCellRenderer extends JPanel implements ListCellRenderer<Object
             setForeground(list.getForeground());
             textLabel.setForeground(list.getForeground());
         }
+        textLabel.setText(contentTexts.get(index));
 
-        if (contentText != null) {
-            textLabel.setText(contentText.get(index));
-        }
         return this;
     }
 
     public void addContentText(String text) {
-        contentText.add(text);
+        contentTexts.add(text);
     }
 
-    public ArrayList<String> getContentText() {
-        return contentText;
+    public ArrayList<String> getContentTexts() {
+        return contentTexts;
     }
 
     private void setUpContents(DefaultListModel<String> model) {
@@ -80,7 +69,7 @@ public class HListCellRenderer extends JPanel implements ListCellRenderer<Object
         textLabel.setVerticalAlignment(SwingConstants.CENTER); //垂直居中
         textLabel.setHorizontalAlignment(SwingConstants.CENTER); //水平居中
         for (int i = 0; i < model.getSize(); i++) {
-            contentText.add(model.get(i));
+            contentTexts.add(model.get(i));
         }
         add(textLabel);
     }
