@@ -3,8 +3,6 @@ package com.hoshino.custom.frames;
 import com.hoshino.custom.themes.HCyan;
 import com.hoshino.custom.themes.HDarkCustom;
 import com.hoshino.custom.themes.HLightCustom;
-import com.hoshino.userSettings.HXMLLoader;
-import com.hoshino.userSettings.UserSettings;
 
 import javax.swing.*;
 import java.awt.*;
@@ -21,13 +19,10 @@ import java.awt.*;
  * 类。它没有重写父类方法。可以它的构造方法提供了自定义窗口标题、窗口图标的实现。它负责为其它继承自它的窗口提供一些基本的实现，比如加载用户设置、窗口出现位置的设置等。
  */
 public class HBasicFrame extends JFrame {
-    private ImageIcon icon;
-    private String currentTheme;
-    private UserSettings settings;
+    protected ImageIcon icon;
+    protected String currentTheme;
 
     public HBasicFrame() {
-        //加载用户设置
-        updateAll();
         //UIManager.put("accentFocusColor", Color.decode("#4600C7"));
 
         //窗口居中出现
@@ -75,10 +70,6 @@ public class HBasicFrame extends JFrame {
         return icon;
     }
 
-    public UserSettings getSettings() {
-        return settings;
-    }
-
     //添加多个组件操作
     public void addAll(Component... components) {
         for (Component component : components) {
@@ -94,47 +85,5 @@ public class HBasicFrame extends JFrame {
      * 它也应该分得更细一点，将主题、其他一些配置的加载分开来<br>
      * 多线程
      */
-    public void updateAll() {
-        /*//读取xml文件并加载
-        File userSettings = new File("main/src/main/resources/user/settings.xml");
-        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-        DocumentBuilder builder;
-        try {
-            builder = factory.newDocumentBuilder();
-        } catch (ParserConfigurationException e) {
-            throw new RuntimeException(e);
-        }
-        Document document;
-        try {
-            document = builder.parse(userSettings);
-        } catch (SAXException | IOException e) {
-            throw new RuntimeException(e);
-        }
-        document.getDocumentElement().normalize();
-        NodeList nodeList = document.getElementsByTagName("userSettings");
-        //遍历
-        for(int i = 0; i < nodeList.getLength(); i++) {
-            //获取当前节点
-            Node node = nodeList.item(i);
-            //System.out.println("Current Element: " + node.getNodeName());
-            if(node.getNodeType() == Node.ELEMENT_NODE) {
-                //获取元素
-                Element element = (Element) node;
 
-                //主题方面的自定义  TODO:主题的话，读取官方给定的properties文件！！！
-                Node themeNode = element.getElementsByTagName("theme").item(0); //获取标签
-                currentTheme = themeNode.getTextContent(); //获取内容
-                setCurrentTheme(currentTheme); //设置主题
-
-                //图标自定义
-                Node iconNode = element.getElementsByTagName("icon").item(0); //获取标签
-                String iconPath = iconNode.getTextContent(); //获取内容
-                icon = new ImageIcon(iconPath); //更新当前图标
-                setIconImage(HImageCompress.compressedImage(icon)); //设置图标到标题栏
-            }
-        }*/
-        HXMLLoader loader = new HXMLLoader("main/src/main/resources/user/settings.xml");
-        this.settings = loader.load();
-        setCurrentTheme(settings.getTheme());
-    }
 }

@@ -1,4 +1,4 @@
-package com.hoshino.userSettings;
+package com.hoshino.storage;
 
 public class UserSettings {
     private String userName;

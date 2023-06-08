@@ -1,28 +1,30 @@
 package com.hoshino.custom.frames;
 
-import com.hoshino.custom.img.HImageCompress;
-import javafx.scene.control.ToolBar;
+import com.hoshino.storage.HStorage;
+import com.hoshino.storage.HXMLFollower;
+import com.hoshino.storage.UserSettings;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
-import static com.formdev.flatlaf.FlatClientProperties.TABBED_PANE_TAB_ICON_PLACEMENT;
-
 /**
  * <h1>启动窗口</h1>
  * <b>简短介绍</b><br>
  * 这是继承自
  * {@link HBasicFrame}
- * 的一个 {@link JFrame} 子类。它是程序的启动入口，打开程序最先显示的窗口。这个窗口需要完成许多任务，它是程序的一个门面。许多功能需要体现在这个窗口之中，可以说其它窗口只是这个窗口的附属。
+ * 的一个 {@link JFrame} 子类。它是程序的启动入口，打开程序最先显示的窗口。这个窗口需要完成许多任务，它是程序的一个门面。许多功能需要体现在这个窗口之中，可以说其它窗口只是这个窗口的附属。它也负责加载配置文件和对本地设置进行配置，比如主题等。
  * <b>详细介绍</b><br>
  * 该类继承自
  * {@link HBasicFrame}
  * 类，同时也是 {@link JFrame} 的子类。它没有重写父类方法。它在该类的构造方法中引用了HBasicFrame父类的构造方法。
  */
-public class StartFrame extends HBasicFrame{
+public class WelcomePage extends HBasicFrame implements HXMLFollower {
     //private JMenuBar titleBar;
+    private UserSettings settings;
+
+    private HStorage loader;
     /**
      * <b>构造方法</b>
      * <br>
@@ -31,9 +33,13 @@ public class StartFrame extends HBasicFrame{
      * 构造方法、并添加组件
      */
     //TODO:解决组件自适应、组件大小及排版问题
-    public StartFrame() {
+    public WelcomePage() {
         super(); //引入父类内容
-        setTitle("Hello, " + getSettings().getUserName() + " !");
+
+        updateAll();
+        loader.addFollowers(this);
+
+        setTitle("Hello, " + settings.getUserName());
         setIconImage(new ImageIcon("main/src/main/resources/img/icon.png").getImage());
         //设置窗口
         setSize(800, 500); //大小：800*500
@@ -71,14 +77,40 @@ public class StartFrame extends HBasicFrame{
         JPanel secondBar = new JPanel();
         secondBar.setLayout(new FlowLayout(FlowLayout.LEFT));
         //TODO:Button目前不符合要求，考虑其他符合要求的。样式参考：见 TIM 自己聊天
-        secondBar.add(new JButton("TEST"));
+        JButton night = new JButton("NIGHT");
+        System.out.println(settings.getTheme());
+        night.addActionListener(e -> {
+            loader.modifyAndUpdateTheme("DARK");
+            System.out.println(settings.getTheme());
+        });
+        secondBar.add(night);
         secondBar.add(new JButton("TEST"));
         secondBar.add(new JButton("TEST"));
 
+        JPanel mainPane = new JPanel();
+        mainPane.setLayout(new CardLayout());
 
-        contentPane.add(secondBar, BorderLayout.NORTH); //添加 次要选项栏 到窗体
-
+        contentPane.add(secondBar, BorderLayout.NORTH); //添加 次要选项栏
+        contentPane.add(mainPane, BorderLayout.CENTER); //添加 主页面
         setJMenuBar(titleBar); //添加 标题菜单栏 到窗口
+    }
+
+    @Override
+    public void updateAll() {
+        this.loader = new HStorage("main/src/main/resources/user/settings.xml");
+        this.settings = loader.load();
+        updateTheme();
+        updateUser();
+    }
+
+    @Override
+    public void updateTheme() {
+        setCurrentTheme(settings.getTheme());
+    }
+
+    @Override
+    public void updateUser() {
+
     }
 
 }
