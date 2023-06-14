@@ -5,6 +5,7 @@ import com.hoshino.storage.HXMLFollower;
 import com.hoshino.storage.UserSettings;
 
 import javax.swing.*;
+import javax.xml.transform.TransformerConfigurationException;
 import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -78,10 +79,13 @@ public class WelcomePage extends HBasicFrame implements HXMLFollower {
         secondBar.setLayout(new FlowLayout(FlowLayout.LEFT));
         //TODO:Button目前不符合要求，考虑其他符合要求的。样式参考：见 TIM 自己聊天
         JButton night = new JButton("NIGHT");
-        System.out.println(settings.getTheme());
         night.addActionListener(e -> {
-            loader.modifyAndUpdateTheme("DARK");
-            System.out.println(settings.getTheme());
+            try {
+                loader.modifyAndUpdateTheme("DARK");
+            } catch (TransformerConfigurationException ex) {
+                throw new RuntimeException(ex);
+            }
+            System.out.println("Theme you set:" + settings.getTheme());
         });
         secondBar.add(night);
         secondBar.add(new JButton("TEST"));
@@ -93,6 +97,7 @@ public class WelcomePage extends HBasicFrame implements HXMLFollower {
         contentPane.add(secondBar, BorderLayout.NORTH); //添加 次要选项栏
         contentPane.add(mainPane, BorderLayout.CENTER); //添加 主页面
         setJMenuBar(titleBar); //添加 标题菜单栏 到窗口
+        System.out.println("Current theme: " + settings.getTheme());
     }
 
     @Override

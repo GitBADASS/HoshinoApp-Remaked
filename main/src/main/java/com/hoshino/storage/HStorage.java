@@ -9,6 +9,9 @@ import org.xml.sax.SAXException;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerConfigurationException;
+import javax.xml.transform.TransformerFactory;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -90,14 +93,19 @@ public class HStorage {
     }
 
     //修改和重新加载主题
-    public void modifyAndUpdateTheme(String newTheme) {
+    public void modifyAndUpdateTheme(String newTheme) throws TransformerConfigurationException {
         operateElement(node -> {
             Element elements = (Element) node;
-            Node nodeGetter = elements.getElementsByTagName(THEME_TAG).item(0);
+            Node nodeGetter = elements.getElementsByTagName(THEME_TAG).item(0).getFirstChild();
 
-            nodeGetter.setTextContent(newTheme);
-            userSettings.setTheme(nodeGetter.getTextContent());
+            nodeGetter.setNodeValue(newTheme);
+            userSettings.setTheme(nodeGetter.getNodeValue());
+            System.out.println("in XML file: " + nodeGetter.getNodeValue());
         });
+        this.document.getDocumentElement().normalize();
+        TransformerFactory factory = TransformerFactory.newInstance();
+        Transformer transformer = factory.newTransformer();
+
 
         for (HXMLFollower follower : followers) {
             follower.updateTheme();
