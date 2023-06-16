@@ -6,6 +6,7 @@ import com.hoshino.storage.UserSettings;
 
 import javax.swing.*;
 import javax.xml.transform.TransformerConfigurationException;
+import javax.xml.transform.TransformerException;
 import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -82,7 +83,7 @@ public class WelcomePage extends HBasicFrame implements HXMLFollower {
         night.addActionListener(e -> {
             try {
                 loader.modifyAndUpdateTheme("DARK");
-            } catch (TransformerConfigurationException ex) {
+            } catch (TransformerException ex) {
                 throw new RuntimeException(ex);
             }
             System.out.println("Theme you set:" + settings.getTheme());
