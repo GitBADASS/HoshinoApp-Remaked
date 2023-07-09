@@ -38,7 +38,7 @@ public class HStorage {
     public UserSettings load() {
         this.userSettings = new UserSettings();
         //读取xml文件并加载
-        loadXML();
+        loadFile();
         operateElement(node -> {
             //获取元素
             Element elements = (Element) node;
@@ -94,22 +94,18 @@ public class HStorage {
 
     //修改和重新加载主题
     public void modifyAndUpdateTheme(String newTheme) throws TransformerException {
+        //操作 xml 对象
         operateElement(node -> {
             Element elements = (Element) node;
             Node nodeGetter = elements.getElementsByTagName(THEME_TAG).item(0).getFirstChild();
 
             nodeGetter.setNodeValue(newTheme);
             userSettings.setTheme(nodeGetter.getNodeValue());
-            System.out.println("in XML file: " + nodeGetter.getNodeValue());
         });
-        this.document.getDocumentElement().normalize();
-        TransformerFactory factory = TransformerFactory.newInstance();
-        Transformer transformer = factory.newTransformer();
-        DOMSource source = new DOMSource(document);
-        StreamResult result = new StreamResult(new File(filePath));
-        transformer.setOutputProperty(OutputKeys.INDENT, "yes");
-        transformer.transform(source, result);
+        //保存修改到文件
+        writeToFile();
 
+        //通知订阅者更改主题
         for (HXMLFollower follower : followers) {
             follower.updateTheme();
         }
@@ -137,8 +133,8 @@ public class HStorage {
     }
 
     //加载读取模块 便于阅读
-    private void loadXML() {
-        //读取xml文件并加载
+    private void loadFile() {
+        //读取xml文件并加载到 this.document 对象中
         File userSettingsFile = new File(filePath);
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder;
@@ -155,5 +151,15 @@ public class HStorage {
         }
         document.getDocumentElement().normalize();
         this.document = document;
+    }
+
+    private void writeToFile() throws TransformerException {
+        this.document.getDocumentElement().normalize();
+        TransformerFactory factory = TransformerFactory.newInstance();
+        Transformer transformer = factory.newTransformer();
+        DOMSource source = new DOMSource(document);
+        StreamResult result = new StreamResult(new File(filePath));
+        transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+        transformer.transform(source, result);
     }
 }

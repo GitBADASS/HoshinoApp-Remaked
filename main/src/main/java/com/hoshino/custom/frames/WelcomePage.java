@@ -5,8 +5,6 @@ import com.hoshino.storage.HXMLFollower;
 import com.hoshino.storage.UserSettings;
 
 import javax.swing.*;
-import javax.xml.transform.TransformerConfigurationException;
-import javax.xml.transform.TransformerException;
 import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -17,7 +15,7 @@ import java.awt.event.WindowEvent;
  * 这是继承自
  * {@link HBasicFrame}
  * 的一个 {@link JFrame} 子类。它是程序的启动入口，打开程序最先显示的窗口。这个窗口需要完成许多任务，它是程序的一个门面。许多功能需要体现在这个窗口之中，可以说其它窗口只是这个窗口的附属。它也负责加载配置文件和对本地设置进行配置，比如主题等。
- * <b>详细介绍</b><br>
+ * <br><b>详细介绍</b><br>
  * 该类继承自
  * {@link HBasicFrame}
  * 类，同时也是 {@link JFrame} 的子类。它没有重写父类方法。它在该类的构造方法中引用了HBasicFrame父类的构造方法。
@@ -58,7 +56,6 @@ public class WelcomePage extends HBasicFrame implements HXMLFollower {
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
-                System.out.println("程序退出");
                 System.exit(0);
             }
         });
@@ -78,27 +75,26 @@ public class WelcomePage extends HBasicFrame implements HXMLFollower {
 
         JPanel secondBar = new JPanel();
         secondBar.setLayout(new FlowLayout(FlowLayout.LEFT));
-        //TODO:Button目前不符合要求，考虑其他符合要求的。样式参考：见 TIM 自己聊天
-        JButton night = new JButton("NIGHT");
-        night.addActionListener(e -> {
-            try {
-                loader.modifyAndUpdateTheme("DARK");
-            } catch (TransformerException ex) {
-                throw new RuntimeException(ex);
-            }
-            System.out.println("Theme you set:" + settings.getTheme());
-        });
-        secondBar.add(night);
-        secondBar.add(new JButton("TEST"));
-        secondBar.add(new JButton("TEST"));
+        //Button目前不符合要求，考虑其他符合要求的。样式参考：见 TIM 自己聊天;
+        //TODO:是否是夜间主题 的辨别考虑如何实现
 
         JPanel mainPane = new JPanel();
-        mainPane.setLayout(new CardLayout());
+        //mainPane.setLayout(new CardLayout());
 
-        contentPane.add(secondBar, BorderLayout.NORTH); //添加 次要选项栏
+        JButton fbl1 = new JButton("1920*1080");
+        fbl1.addActionListener(e->{
+            setSize(1920, 1080);
+        });
+        JButton fbl2 = new JButton("1280*720");
+        fbl2.addActionListener(e->{
+            setSize(1280, 720);
+        });
+        mainPane.add(fbl1);
+        mainPane.add(fbl2);
+
+        contentPane.add(secondBar, BorderLayout.NORTH); //添加 上方次要选项栏
         contentPane.add(mainPane, BorderLayout.CENTER); //添加 主页面
         setJMenuBar(titleBar); //添加 标题菜单栏 到窗口
-        System.out.println("Current theme: " + settings.getTheme());
     }
 
     @Override
